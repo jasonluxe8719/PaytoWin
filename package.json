@@ -1,5 +1,5 @@
 {
-  "name": "coffee_drinks_facts",
+  "name": "pay_to_win",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.10.4",
+    "@babel/core": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "babel-loader": "^8.1.0",
     "d3": "^5.16.0",
