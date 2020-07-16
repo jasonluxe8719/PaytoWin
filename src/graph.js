@@ -1,4 +1,4 @@
-import { svg, margin, height, width } from './canvas';
+import { canvas, margin, height, width } from './canvas';
 import { xScale, yScale } from './scale';
 
 const xAxis = d3
