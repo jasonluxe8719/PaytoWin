@@ -37,34 +37,40 @@ d3.csv("../data/all_data.csv").then(data => {
     }
   }
 
-  cleanData = sortedData.map(function(sortedD) {
+  cleanData = sortedData.map(function (sortedD) {
     return sortedD["teams"]
-      .map(function(team) {
+      .map(function (team) {
         team.SeasonWage = +team.SeasonWage;
         team.FinalLeagueStanding = +team.FinalLeagueStanding;
         team.PointsGained = +team.PointsGained;
         return team;
       });
   });
- 
+
 
   // for(let k = 0; k < cleanData.length; k++) {
-    visualize(cleanData[0]);
-  // }
+  visualize(cleanData[0], 0);
+
 
 });
-//   cleanData = sortedData.map(function(d) {
-//     d["teams"].map(function(team) {
-//         team.SeasonWage = +team.SeasonWage;
-//         team.FinalLeagueStanding = +team.FinalLeagueStanding;
-//         team.PointsGained = +team.PointsGained;
-//         return team;
-//         })
-//   });
 
-// });
-//     console.log(cleanData);
+let interval;
+let year = 0;
+let button = document.getElementById("loop-button");
 
+function loop() {
+  year = year < 18 ? year + 1 : 0;
+  visualize(cleanData[year], year);
+}
 
+button.addEventListener("click", function(e) {
+  if (button.innerHTML === "Loop") {
+    interval = setInterval(loop, 1000);
+    button.innerHTML = "Pause";
+  } else if (button.innerHTML === "Pause") {
+    clearInterval(interval);
+    button.innerHTML = "Loop";
+  }
+});
 
 

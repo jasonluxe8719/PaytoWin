@@ -1,56 +1,85 @@
 
-export const visualize = (teamData, idx) => {
+export const visualize = (teamData) => {
 
-  let margin = { top: 20, right: 20, bottom: 20, left: 100 };
-  let height = 600 - margin.top - margin.bottom;
-  let width = 1000 - margin.left - margin.right;
+  const margin = { top: 50, right: 20, bottom: 60, left: 200 };
+  const height = 600;
+  const width = 900;
+  const innerHeight = height - margin.top - margin.bottom;
+  const innerWidth = width - margin.left - margin.right;
 
-  let xScale = d3
+  const xScale = d3
     .scaleLinear()
     .domain([0, 300])
-    .range([0, width - margin.left - margin.right]);
+    .range([0, innerWidth]);
 
-    let yScale = d3
-    .scaleBand()
-    .domain(teamData.map(d => d.Team))
-    .range([0, height - margin.top - margin.bottom]);
+  const yScale = d3
+  .scaleBand()
+  .domain(teamData.map(d => d.Team))
+  .range([0, innerHeight])
+  .padding(0.2)
 
-  let svg = d3
-    .select("#canvas-area")
+  const g = d3
+    .select("#graph-area")
     .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+    .attr("height", height)
+    .attr("width", width)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-  let xAxis = d3
+  const xAxis = d3
     .axisBottom(xScale)
     .tickSize(10)
     .tickFormat(function(d) {
       return +d;
     });
 
-  svg
+  g
     .append("g")
-    .attr("font-family", "Helvetica")
-    .attr("class", "canvas-x-axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
+    .attr("class", "graph-x-axis")
+    .call(xAxis)
+    .attr("transform", "translate(0," + innerHeight + ")")
 
-  let yAxis = d3
+  const yAxis = d3
     .axisLeft(yScale)
     .tickSize(20)
     .tickFormat(function(d) {
-      return +d;
+      return d;
     });
 
-  svg
+  g
     .append("g")
     .attr("font-family", "Helvetica")
-    .attr("class", "canvas-y-axis")
-    .call(yAxis);
-  
+    .attr("class", "graph-y-axis")
+    .call(yAxis)
+    .selectAll('.domain, .tick line')
+      .remove();
 
-  svg
+  //x-axis Label
+  g
+    .append("text")
+    .attr("y", innerHeight + 55)
+    .attr("x", innerWidth / 2)
+    .attr("text-anchor", "middle")
+    .attr("font-family", "Helvetica")
+    .attr("font-size", "20px")
+    .text("Season Wage by Team (in million pounds)")
+    .style("stroke", "blue");
+
+  //y-axis Label
+  g
+    .append("text")
+    .attr("y", -150)
+    .attr("x", 0 - innerHeight / 2)
+    .attr("transform", "rotate(-90)")
+    .attr("text-anchor", "middle")
+    .attr("font-family", "Helvetica")
+    .attr("font-size", "20px")
+    .attr("class", "y-axis-text")
+    .text("Premier League Team")
+    .style("stroke", "blue");
+
+    
+    g
     .selectAll("rect")
     .data(teamData)
     .enter()
@@ -60,5 +89,10 @@ export const visualize = (teamData, idx) => {
     .attr("height", yScale.bandwidth())
     .attr("width", d => xScale(d.SeasonWage))
     .attr("opacity", "85%");
-
+    
+    // let rectangles = g.selectAll("rect").data(function(d) {
+    //   return d.Team;
+    // });
+  
+    // rectangles.exit().remove();
 }

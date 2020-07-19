@@ -1,0 +1,31 @@
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.features {
+  margin-right: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-name {
+  font-family: Helvetica;
+  font-size: 50px;
+  margin-bottom: 150px;
+}
+
+
+rect {
+  fill: steelblue;
+}
+
+.graph-x-axis, .graph-y-axis  {
+  font-size: 12px;
+}
+
+.x-axis-text {
+  color: blue;
+}

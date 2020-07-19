@@ -5,19 +5,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pay to Win</title>
+  <link rel="stylesheet" href="../stylesheets/reset.css">
+  <link rel="stylesheet" href="../stylesheets/style.css">
   <script src="https://d3js.org/d3.v5.min.js"></script>
 </head>
 <body>
   <div class="app-container">
     
-    <div class="left-side">
+    <div class="features">
       
-      <div class="app-title">PaytoWin</div>
-      
-      <div class="features">
+        <h1 class="app-name">Pay to Win</h1>
+
+        <p class="app-title">Economic Efficiency of the English Premier League</p>
+
         <button id="loop-button">Loop</button>
         
-        <select id="team-select">
+        <!-- <select id="team-select">
           <option selected value="all">All Teams</option>
           <option value="Arsenal">Arsenal</option>
           <option value="Aston Villa">Aston Villa</option>
@@ -61,7 +64,7 @@
           <option value="Wigan Athletic">Wigan Athletic</option>
           <option value="Wolves">Wolves</option>
           
-        </select>
+        </select> -->
         
         
         <select id="year-select">
@@ -89,14 +92,10 @@
         
       </div>
       
-      <div class="canvas" id="canvas-area">
-        
+      <div id="graph-area">
+        <script type="application/javascript" src="./main.js"></script>
       </div>
-      
-    </div>
     
-    
-    <script type="application/javascript" src="./main.js"></script>
   </div>
 </body>
 </html>

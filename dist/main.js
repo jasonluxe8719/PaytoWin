@@ -174,17 +174,26 @@ d3.csv("../data/all_data.csv").then(function (data) {
     });
   }); // for(let k = 0; k < cleanData.length; k++) {
 
-  Object(_visualize__WEBPACK_IMPORTED_MODULE_0__["visualize"])(cleanData[0]); // }
-}); //   cleanData = sortedData.map(function(d) {
-//     d["teams"].map(function(team) {
-//         team.SeasonWage = +team.SeasonWage;
-//         team.FinalLeagueStanding = +team.FinalLeagueStanding;
-//         team.PointsGained = +team.PointsGained;
-//         return team;
-//         })
-//   });
-// });
-//     console.log(cleanData);
+  Object(_visualize__WEBPACK_IMPORTED_MODULE_0__["visualize"])(cleanData[0], 0);
+});
+var interval;
+var year = 0;
+var button = document.getElementById("loop-button");
+
+function loop() {
+  year = year < 18 ? year + 1 : 0;
+  Object(_visualize__WEBPACK_IMPORTED_MODULE_0__["visualize"])(cleanData[year], year);
+}
+
+button.addEventListener("click", function (e) {
+  if (button.innerHTML === "Loop") {
+    interval = setInterval(loop, 1000);
+    button.innerHTML = "Pause";
+  } else if (button.innerHTML === "Pause") {
+    clearInterval(interval);
+    button.innerHTML = "Loop";
+  }
+});
 
 /***/ }),
 
@@ -198,33 +207,42 @@ d3.csv("../data/all_data.csv").then(function (data) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "visualize", function() { return visualize; });
-var visualize = function visualize(teamData, idx) {
+var visualize = function visualize(teamData) {
   var margin = {
-    top: 20,
+    top: 50,
     right: 20,
-    bottom: 20,
-    left: 100
+    bottom: 60,
+    left: 200
   };
-  var height = 600 - margin.top - margin.bottom;
-  var width = 1000 - margin.left - margin.right;
-  var xScale = d3.scaleLinear().domain([0, 300]).range([0, width - margin.left - margin.right]);
+  var height = 600;
+  var width = 900;
+  var innerHeight = height - margin.top - margin.bottom;
+  var innerWidth = width - margin.left - margin.right;
+  var xScale = d3.scaleLinear().domain([0, 300]).range([0, innerWidth]);
   var yScale = d3.scaleBand().domain(teamData.map(function (d) {
     return d.Team;
-  })).range([0, height - margin.top - margin.bottom]);
-  var svg = d3.select("#canvas-area").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
+  })).range([0, innerHeight]).padding(0.2);
+  var g = d3.select("#graph-area").append("svg").attr("height", height).attr("width", width).append("g").attr("transform", "translate(".concat(margin.left, ", ").concat(margin.top, ")"));
   var xAxis = d3.axisBottom(xScale).tickSize(10).tickFormat(function (d) {
     return +d;
   });
-  svg.append("g").attr("font-family", "Helvetica").attr("class", "canvas-x-axis").attr("transform", "translate(0," + height + ")").call(xAxis);
+  g.append("g").attr("class", "graph-x-axis").call(xAxis).attr("transform", "translate(0," + innerHeight + ")");
   var yAxis = d3.axisLeft(yScale).tickSize(20).tickFormat(function (d) {
-    return +d;
+    return d;
   });
-  svg.append("g").attr("font-family", "Helvetica").attr("class", "canvas-y-axis").call(yAxis);
-  svg.selectAll("rect").data(teamData).enter().append("rect").attr("fill", "red").attr("y", function (d) {
+  g.append("g").attr("font-family", "Helvetica").attr("class", "graph-y-axis").call(yAxis).selectAll('.domain, .tick line').remove(); //x-axis Label
+
+  g.append("text").attr("y", innerHeight + 55).attr("x", innerWidth / 2).attr("text-anchor", "middle").attr("font-family", "Helvetica").attr("font-size", "20px").text("Season Wage by Team (in million pounds)").style("stroke", "blue"); //y-axis Label
+
+  g.append("text").attr("y", -150).attr("x", 0 - innerHeight / 2).attr("transform", "rotate(-90)").attr("text-anchor", "middle").attr("font-family", "Helvetica").attr("font-size", "20px").attr("class", "y-axis-text").text("Premier League Team").style("stroke", "blue");
+  g.selectAll("rect").data(teamData).enter().append("rect").attr("fill", "red").attr("y", function (d) {
     return yScale(d.Team);
   }).attr("height", yScale.bandwidth()).attr("width", function (d) {
     return xScale(d.SeasonWage);
-  }).attr("opacity", "85%");
+  }).attr("opacity", "85%"); // let rectangles = g.selectAll("rect").data(function(d) {
+  //   return d.Team;
+  // });
+  // rectangles.exit().remove();
 };
 
 /***/ })
