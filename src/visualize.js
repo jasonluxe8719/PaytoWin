@@ -1,6 +1,7 @@
 import { margin, height, width, innerHeight, innerWidth, g } from './graph_area';
+import { info } from './info';
 
-export const visualize = (teamData, year) => {
+export const visualize = (teamData) => {
   
   const xScale = d3
     .scaleLinear()
@@ -75,7 +76,11 @@ export const visualize = (teamData, year) => {
     .attr("y", d => yScale(d.Team))
     .attr("height", yScale.bandwidth())
     .attr("width", d => xScale(d.SeasonWage))
-    .attr("opacity", "85%");
+    .on("mouseover", info.show)
+    .on("mouseout", info.hide);
+ 
+
+    
 
 
     // rectangles.exit();

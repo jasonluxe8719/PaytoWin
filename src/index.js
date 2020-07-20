@@ -1,6 +1,6 @@
-
 import { visualize } from './visualize';
 import { update } from './update';
+import { g } from './graph_area';
 
 let cleanData;
 
@@ -50,7 +50,7 @@ d3.csv("../data/all_data.csv").then(data => {
 
 
   visualize(cleanData[0]);
-  // for(let k = 0; k < cleanData.length; k++) {
+
 
 });
 
@@ -81,5 +81,6 @@ button.addEventListener("click", function(e) {
 selectedYear.addEventListener("change", function() {
   update(cleanData[selectedYear.value - 2001]);
 });
+
 
 

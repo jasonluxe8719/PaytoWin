@@ -126,6 +126,8 @@ var g = d3.select("#graph-area").append("svg").attr("height", height).attr("widt
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _visualize__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./visualize */ "./src/visualize.js");
 /* harmony import */ var _update__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./update */ "./src/update.js");
+/* harmony import */ var _graph_area__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./graph_area */ "./src/graph_area.js");
+
 
 
 var cleanData;
@@ -204,7 +206,7 @@ d3.csv("../data/all_data.csv").then(function (data) {
       return team;
     });
   });
-  Object(_visualize__WEBPACK_IMPORTED_MODULE_0__["visualize"])(cleanData[0]); // for(let k = 0; k < cleanData.length; k++) {
+  Object(_visualize__WEBPACK_IMPORTED_MODULE_0__["visualize"])(cleanData[0]);
 });
 var selectedYear = document.getElementById("select-year");
 var interval;
@@ -232,6 +234,29 @@ selectedYear.addEventListener("change", function () {
 
 /***/ }),
 
+/***/ "./src/info.js":
+/*!*********************!*\
+  !*** ./src/info.js ***!
+  \*********************/
+/*! exports provided: info */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "info", function() { return info; });
+/* harmony import */ var _graph_area__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./graph_area */ "./src/graph_area.js");
+
+var info = d3.tip().attr("class", "info").html(function (d) {
+  var infotext = "<p>Season: </p> <p>" + d.Year + "</p><br>";
+  infotext += "<p>Team Name: </p> <p>" + d.Team + "</p><br>";
+  infotext += "<p>Final League Standing: </p> <p>" + d.FinalLeagueStanding + "</p><br>";
+  infotext += "<p>Total Points Gained: </p> <p>" + d.PointsGained + "</p><br>";
+  return infotext;
+});
+_graph_area__WEBPACK_IMPORTED_MODULE_0__["g"].call(info);
+
+/***/ }),
+
 /***/ "./src/update.js":
 /*!***********************!*\
   !*** ./src/update.js ***!
@@ -243,8 +268,10 @@ selectedYear.addEventListener("change", function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "update", function() { return update; });
 /* harmony import */ var _graph_area__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./graph_area */ "./src/graph_area.js");
+/* harmony import */ var _info__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./info */ "./src/info.js");
 
-var update = function update(teamData, year) {
+
+var update = function update(teamData) {
   var rects = _graph_area__WEBPACK_IMPORTED_MODULE_0__["g"].selectAll("rect, g").remove().exit().data(teamData);
   var xScale = d3.scaleLinear().domain([0, 300]).range([0, _graph_area__WEBPACK_IMPORTED_MODULE_0__["innerWidth"]]);
   var yScale = d3.scaleBand().domain(teamData.map(function (d) {
@@ -266,7 +293,7 @@ var update = function update(teamData, year) {
     return yScale(d.Team);
   }).attr("height", yScale.bandwidth()).attr("width", function (d) {
     return xScale(d.SeasonWage);
-  }).attr("opacity", "85%");
+  }).on("mouseover", _info__WEBPACK_IMPORTED_MODULE_1__["info"].show).on("mouseout", _info__WEBPACK_IMPORTED_MODULE_1__["info"].hide);
 };
 
 /***/ }),
@@ -282,8 +309,10 @@ var update = function update(teamData, year) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "visualize", function() { return visualize; });
 /* harmony import */ var _graph_area__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./graph_area */ "./src/graph_area.js");
+/* harmony import */ var _info__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./info */ "./src/info.js");
 
-var visualize = function visualize(teamData, year) {
+
+var visualize = function visualize(teamData) {
   var xScale = d3.scaleLinear().domain([0, 300]).range([0, _graph_area__WEBPACK_IMPORTED_MODULE_0__["innerWidth"]]);
   var yScale = d3.scaleBand().domain(teamData.map(function (d) {
     return d.Team;
@@ -304,7 +333,7 @@ var visualize = function visualize(teamData, year) {
     return yScale(d.Team);
   }).attr("height", yScale.bandwidth()).attr("width", function (d) {
     return xScale(d.SeasonWage);
-  }).attr("opacity", "85%"); // rectangles.exit();
+  }).on("mouseover", _info__WEBPACK_IMPORTED_MODULE_1__["info"].show).on("mouseout", _info__WEBPACK_IMPORTED_MODULE_1__["info"].hide); // rectangles.exit();
   // rectangles.exit().remove();
 };
 

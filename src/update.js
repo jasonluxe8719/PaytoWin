@@ -1,6 +1,7 @@
 import { margin, height, width, innerHeight, innerWidth, g } from './graph_area';
+import { info } from './info';
 
-export const update = (teamData, year) => {
+export const update = (teamData) => {
 
   let rects = g.selectAll("rect, g").remove().exit().data(teamData);
 
@@ -76,5 +77,7 @@ export const update = (teamData, year) => {
     .attr("y", d => yScale(d.Team))
     .attr("height", yScale.bandwidth())
     .attr("width", d => xScale(d.SeasonWage))
-    .attr("opacity", "85%");
+    .on("mouseover", info.show)
+    .on("mouseout", info.hide);
+
 }
