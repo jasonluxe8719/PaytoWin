@@ -1,7 +1,10 @@
 import { margin, height, width, innerHeight, innerWidth, g } from './graph_area';
 
-export const visualize = (teamData, year) => {
-  
+export const update = (teamData, year) => {
+
+  let rects = g.selectAll("rect, g").remove().exit().data(teamData);
+
+
   const xScale = d3
     .scaleLinear()
     .domain([0, 300])
@@ -66,9 +69,7 @@ export const visualize = (teamData, year) => {
     .text("Premier League Team (by Final Standings)")
     .style("stroke", "blue");
 
-  g
-    .selectAll("rect")
-    .data(teamData)
+  rects
     .enter()
     .append("rect")
     .attr("fill", "steelblue")
@@ -76,11 +77,4 @@ export const visualize = (teamData, year) => {
     .attr("height", yScale.bandwidth())
     .attr("width", d => xScale(d.SeasonWage))
     .attr("opacity", "85%");
-
-
-    // rectangles.exit();
-    
-  
-    // rectangles.exit().remove();
 }
-

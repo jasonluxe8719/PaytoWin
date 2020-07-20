@@ -1,10 +1,11 @@
 
 import { visualize } from './visualize';
-
+import { update } from './update';
 
 let cleanData;
 
 d3.csv("../data/all_data.csv").then(data => {
+
   let sortedData = [
     { year: 2001, teams: [] },
     { year: 2002, teams: [] },
@@ -37,8 +38,8 @@ d3.csv("../data/all_data.csv").then(data => {
     }
   }
 
-  cleanData = sortedData.map(function (sortedD) {
-    return sortedD["teams"]
+  cleanData = sortedData.map(function (d) {
+    return d["teams"]
       .map(function (team) {
         team.SeasonWage = +team.SeasonWage;
         team.FinalLeagueStanding = +team.FinalLeagueStanding;
@@ -48,19 +49,22 @@ d3.csv("../data/all_data.csv").then(data => {
   });
 
 
+  visualize(cleanData[0]);
   // for(let k = 0; k < cleanData.length; k++) {
-  visualize(cleanData[0], 0);
-
 
 });
 
+let selectedYear = document.getElementById("select-year");
 let interval;
 let year = 0;
 let button = document.getElementById("loop-button");
 
+
+
 function loop() {
-  year = year < 18 ? year + 1 : 0;
-  visualize(cleanData[year], year);
+  year = year < 17 ? year + 1 : 0;
+  selectedYear.value = year + 2001;
+  update(cleanData[year]);
 }
 
 button.addEventListener("click", function(e) {
@@ -71,6 +75,11 @@ button.addEventListener("click", function(e) {
     clearInterval(interval);
     button.innerHTML = "Loop";
   }
+});
+
+
+selectedYear.addEventListener("change", function() {
+  update(cleanData[selectedYear.value - 2001]);
 });
 
 

@@ -5,8 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pay to Win</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fredoka+One">
   <link rel="stylesheet" href="../stylesheets/reset.css">
   <link rel="stylesheet" href="../stylesheets/style.css">
+  <script src="https://use.fontawesome.com/releases/v5.11.2/js/all.js"></script>
   <script src="https://d3js.org/d3.v5.min.js"></script>
 </head>
 <body>
@@ -14,12 +18,56 @@
     
     <div class="features">
       
-        <h1 class="app-name">Pay to Win</h1>
-
+        <div class="app-name">Pay to Win 
+          <div class="links">
+            <a id="mark" href="https://github.com/jasonluxe8719/PaytoWin">
+              <i class="fab fa-github"></i>
+            </a>
+            <a id="mark" href="https://linkedin.com/in/jasonpark0119">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
         <p class="app-title">Economic Efficiency of the English Premier League</p>
 
-        <button id="loop-button">Loop</button>
+        <div class="selections">
+          <button id="loop-button">Loop</button>
+          
+          <select id="select-year">
+            <option value="2001">2001</option>
+            <option value="2002">2002</option>
+            <option value="2003">2003</option>
+            <option value="2004">2004</option>
+            <option value="2005">2005</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            
+          </select>
+
+        </div>
         
+        <div class="description">
+          <p>
+            The graphs represent the relationship between the final league standings and season wages for the English Premier League teams from 2001 to 2018.
+          </p>
+          <br>
+          <p>
+            Please see more team information by hovering over each bar.
+          </p>
+          <br>
+          <p>Data Sources: The Telegraph & The Guardian</p>
+        </div>
         <!-- <select id="team-select">
           <option selected value="all">All Teams</option>
           <option value="Arsenal">Arsenal</option>
@@ -67,28 +115,6 @@
         </select> -->
         
         
-        <select id="year-select">
-          <option value="2001">2001</option>
-          <option value="2002">2002</option>
-          <option value="2003">2003</option>
-          <option value="2004">2004</option>
-          <option value="2005">2005</option>
-          <option value="2006">2006</option>
-          <option value="2007">2007</option>
-          <option value="2008">2008</option>
-          <option value="2009">2009</option>
-          <option value="2010">2010</option>
-          <option value="2011">2011</option>
-          <option value="2012">2012</option>
-          <option value="2013">2013</option>
-          <option value="2014">2014</option>
-          <option value="2015">2015</option>
-          <option value="2016">2016</option>
-          <option value="2017">2017</option>
-          <option value="2018">2018</option>
-          
-          
-        </select>
         
       </div>
       
