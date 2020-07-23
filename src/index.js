@@ -4,7 +4,7 @@ import { g } from './graph_area';
 
 let cleanData;
 
-d3.csv("all_data.csv").then(data => {
+d3.csv("./data/all_data.csv").then(data => {
 
   let sortedData = [
     { year: 2001, teams: [] },

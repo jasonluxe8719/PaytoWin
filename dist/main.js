@@ -131,7 +131,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var cleanData;
-d3.csv("all_data.csv").then(function (data) {
+d3.csv("./data/all_data.csv").then(function (data) {
   var sortedData = [{
     year: 2001,
     teams: []
