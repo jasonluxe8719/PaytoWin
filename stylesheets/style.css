@@ -78,3 +78,18 @@ rect {
 .x-axis-text {
   color: blue;
 }
+
+.info {
+  padding: 10px;
+  font-family: 'Josefin Sans';
+  border: 1px solid black;
+  border-radius: 1px;
+  background-color: #14B8C4;
+  color: black;
+  cursor: pointer;
+}
+
+.info p {
+  position: relative;
+  padding: 5px;
+} 

@@ -80,12 +80,6 @@ export const visualize = (teamData) => {
     .on("mouseout", info.hide);
  
 
-    
 
-
-    // rectangles.exit();
-    
-  
-    // rectangles.exit().remove();
 }
 

@@ -4,11 +4,7 @@ export const info = d3
   .tip()
   .attr("class", "info")
   .html(function(d) {
-    let infotext = "<p>Season: </p> <p>" + d.Year + "</p><br>";
-
-    infotext += "<p>Team Name: </p> <p>" + d.Team + "</p><br>";
-
-    infotext += 
+    let infotext = 
       "<p>Final League Standing: </p> <p>" + d.FinalLeagueStanding +
       "</p><br>";
     
@@ -19,4 +15,5 @@ export const info = d3
   });
 
 g.call(info);
+
 
