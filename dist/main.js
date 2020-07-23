@@ -247,11 +247,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _graph_area__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./graph_area */ "./src/graph_area.js");
 
 var info = d3.tip().attr("class", "info").html(function (d) {
-  var infotext = "<p>Season: </p> <p>" + d.Year + "</p><br>";
-  infotext += "<p>Team Name: </p> <p>" + d.Team + "</p><br>";
-  infotext += "<p>Final League Standing: </p> <p>" + d.FinalLeagueStanding + "</p><br>";
-  infotext += "<p>Total Points Gained: </p> <p>" + d.PointsGained + "</p><br>";
-  return infotext;
+  return "<p>Total Points Gained: </p> <p>" + d.PointsGained + "</p><br>";
 });
 _graph_area__WEBPACK_IMPORTED_MODULE_0__["g"].call(info);
 
@@ -333,8 +329,7 @@ var visualize = function visualize(teamData) {
     return yScale(d.Team);
   }).attr("height", yScale.bandwidth()).attr("width", function (d) {
     return xScale(d.SeasonWage);
-  }).on("mouseover", _info__WEBPACK_IMPORTED_MODULE_1__["info"].show).on("mouseout", _info__WEBPACK_IMPORTED_MODULE_1__["info"].hide); // rectangles.exit();
-  // rectangles.exit().remove();
+  }).on("mouseover", _info__WEBPACK_IMPORTED_MODULE_1__["info"].show).on("mouseout", _info__WEBPACK_IMPORTED_MODULE_1__["info"].hide);
 };
 
 /***/ })
