@@ -5,7 +5,7 @@ export const info = d3
   .attr("class", "info")
   .html(function(d) {
     
-    return "<p>Total Points Gained: </p> <p>" + d.PointsGained + "</p><br>";
+    return "<p> Total Points Gained: </p> <p>" + d.PointsGained + "</p><br>";
 
   });
 

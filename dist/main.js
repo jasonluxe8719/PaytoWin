@@ -131,7 +131,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var cleanData;
-d3.csv("../data/all_data.csv").then(function (data) {
+d3.csv("data/all_data.csv").then(function (data) {
   var sortedData = [{
     year: 2001,
     teams: []
@@ -247,7 +247,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _graph_area__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./graph_area */ "./src/graph_area.js");
 
 var info = d3.tip().attr("class", "info").html(function (d) {
-  return "<p>Total Points Gained: </p> <p>" + d.PointsGained + "</p><br>";
+  return "<p> Total Points Gained: </p> <p>" + d.PointsGained + "</p><br>";
 });
 _graph_area__WEBPACK_IMPORTED_MODULE_0__["g"].call(info);
 

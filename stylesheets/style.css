@@ -80,11 +80,11 @@ rect {
 }
 
 .info {
-  padding: 2px;
+  padding: 1px;
   font-family: 'Raleway';
   border: 1px solid black;
-  border-radius: 1px;
-  background-color: #14B8C4;
+  border-radius: 5%;
+  background-color: #F6F9ED;
   color: black;
   cursor: pointer;
 }
